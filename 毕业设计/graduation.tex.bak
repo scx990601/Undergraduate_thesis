@@ -1,0 +1,526 @@
+\documentclass[twoside,a4paper]{article}
+\usepackage{geometry}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+% useful packages.
+\usepackage{CTEX}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{layout}
+\usepackage{setspace}
+\usepackage{pdfpages}
+
+
+
+% some common command
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\pdfFrac}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bracket}[1]{\left( #1 \right)}
+
+\renewcommand{\abstractname}{摘要}
+\renewcommand{\contentsname}{目录}
+\renewcommand{\refname}{参考文献}
+
+\numberwithin{equation}{subsection}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}{Lemma}[subsection]
+\newtheorem{definition}{Definition}[subsection]
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{3170102187 孙晨旭}
+\chead{毕业论文}
+\rhead{\today}
+
+
+
+\begin{figure}[t]
+    \centering
+    \vskip 2cm
+	\includegraphics[scale=1]{xiaohui.jpg} %校徽
+\end{figure}
+
+\vskip 3cm
+
+\begin{center}
+	\heiti \zihao{2} 二维快速多极算法的矩阵形式
+\end{center}
+
+\vskip 2cm
+
+\begin{quotation}
+	\songti \fontsize{10}{10}
+	\par\setlength\parindent{17em}
+	\quad
+
+	学\hspace{0.61cm} 院：\underline{数学科学学院\quad}
+
+	专\hspace{0.61cm} 业：\underline{信息与计算科学}
+
+	学生姓名：\underline{\qquad 孙晨旭\qquad}
+
+	学\hspace{0.61cm} 号：\underline{\quad 3170102187\quad}
+
+	指导教师：\underline{\qquad 赖\quad 俊 \qquad}
+	\vskip 2cm
+	\centering
+	\today
+\end{quotation}
+
+
+\newpage
+
+\begin{abstract}
+······························
+\end{abstract}
+\addcontentsline{toc}{section}{摘要}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\part{毕业论文}
+\section{绪论}
+······························
+\section{正文}
+······························
+
+
+
+\setcounter{section}{0}
+\part{毕业论文开题报告}
+\section{文献综述}
+······························
+\section{开题报告}
+······························
+\section{外文翻译}
+我们给出了一种快速评估包含多个粒子的系统的势能或场强的算法。更具体地说，我们考虑的是粒子间相互作用表现为自然界中库仑力或引力的形式。对于N个粒子的系统，一般需要$O(N^2)$ 的工作量来评估其相互作用，除非用一些近似或截断的方法。本文所用方法在给定误差内工作量与N成正比，使得在电磁物理学、流体力学、分子动力学和天体力学中的大规模计算更为可行。
+
+
+
+{\noindent} \rule[-10pt]{17.5cm}{0.05em}
+
+\subsection{简介}
+一些领域已经很好地建立了利用粒子模拟的物理学系统研究方法，而且该方法正在被更多领域所重视。最典型的例子或许是天地动力学，许多近期的关于粒子模型的计算与研究工作却在电磁物理学、流体力学和分子动力学开展。
+
+
+模拟方法主要分两大类。在某些感兴趣的时间间隔内，动态模拟追踪N个粒子的轨迹。给定一些初始位置$\{x_i\}$ 以及速度，每个粒子的轨迹由牛顿第二定律给出：
+$$
+m_i \frac{\dif^2 x_i }{\dif t^2} = - \nabla_i \Phi \quad for \  i = 1,\ldots,N
+$$
+其中$m_i$为第i个粒子的质量，然后力从势函数$\Phi$的梯度中获得。若我们对平衡时的情况更感兴趣而不是他们随时间变换的性质，我们可以需用Monte-Carlo法。在这个例子中，势函数$\Phi$包含大量粒子的计算，力图求出其最小值。
+
+
+这篇文章中，我们只关注势能或力由一系列相互关系加和而成的情况。更具体地说，我们考虑的势有如下形式
+$$
+\Phi = \Phi_{far} + ( \Phi_{near} + \Phi_{external} )
+$$
+其中$\Phi_{near} $这一部分会快速衰减，$\Phi_{external}$ 这部分与粒子数量无关，$\Phi_{far}$这部分远场势是库伦或重力势。这类模型表述了许多天体物理、电磁物理学和分子动力学中的问题。在不可压缩流体的涡方法计算中，一个重要且昂贵的部分也有相同的结构（流量函数与涡旋是由Poisson 方程相关联的）。
+
+
+在N个粒子的系统中，$\Phi_{near}$需要与N成正比的计算量，$\Phi_{external}$也类似。但是库伦或重力势的衰减慢到要求我们计算所有的相互关系，这就导致CPU运算量达到$O(N^2)$ 阶。本文介绍的快速算法计算所有粒子间的相互关系只要$O(N)$阶。
+
+
+先前已有很多关于减少N-体问题计算量的研究工作。Particle-in-cell methods [5]被仔细研究并成功应用，尤其在电磁物理学领域中。假定电势满足Poisson方程，计算区域被均匀网格划分，该方法有：
+\begin{enumerate}[(1)]
+\item 在网格点插值源点密度
+\item 应用“快速Poisson求解器”在网格上获得值
+\item 通过势与粒子位置的插值获得力
+\end{enumerate}
+
+
+该方法的复杂度为$O(N+M\log M)$，其中M为网格点的个数。网格点的个数通常与粒子个数成比例，但是差一个小比例常数使得$M << N$。因此该方法渐进复杂度为$O (N \log N)$，实际中计算量通常被视为与N成比例。不幸的是，网格分割提供了有限的精度，高度不均匀的源点分布会导致性能降低。第三步中的数值微分将进一步的引入误差。
+
+
+为了改进particle-in-cell的计算，近距离的相互作用可以通过直接结算获得，而远距离的相互关系通过网格划分获得，就得到了所谓particle-particle/particle-mesh（$P^3 M$）方法。将此方法引用在涡旋计算中，见[1].然而，这些方法的性能都依赖于一种较为均匀分布的前提下，理论上确实可以允许获取任意高的精度。通常，若我们要求的精度相对低一些，这些粒子在某个矩形区域分布的均匀一些或不均匀一些都能通过$P^3 M$ 获得较为满意的结果。但若要求高精度（例如一些高度相关系统的建模中），运算时间就变得过多了。
+
+
+Appel[2]介绍了一种“无网格”方法用于多体问题的计算，计算复杂度估计为$O(N \log N)$。该方法依赖于单极点（质量中心）近似用于计算远距离的力以及一些复杂的数据结构来追踪那些粒子簇成一团以使得近似计算有效。对特定类型的问题，该方法与单纯$O(N^2)$方法比有显著的加速。当粒子相对均匀与所需精度很高时性能就下降了。
+
+
+
+我们给出的用多极展开求势能或力的方法可以应对任意精度，并且复杂度与N成比例。我们的方法与[7] 中解Laplace 方程的边值问题相似。在下一部分中，我们会给出必要的分析工具，在第三节中给出详细的算法描述。
+
+\subsection{物理与数学上的准备工作}
+
+
+在本文中，我们考虑一个二维物理模型，它由N个粒子组成，其势能与力是由库伦定律成对相互作用累加而成。考虑一个单位点电荷为于点$(x_0,y_o) = \mathbf{x}_0 \in \mathbb{R}^2$. 于是对任意点$\mathbf{x} = (x,y) \in \mathbb{R}^2$，其中$\mathbf{x} \not= \mathbf{x}_0$，由下述表达式描述了这种电荷引起的电位和静电场
+$$
+\phi_{\mathbf{x}_0}(x,y) = - \log (\norm{\mathbf{x} - \mathbf{x}_0})
+$$
+以及
+$$
+E_{\mathbf{x}_0}(x,y) = \frac{\mathbf{x} - \mathbf{x}_0}{\norm{\mathbf{x} - \mathbf{x}_0}^2}
+$$
+
+众所周知，$\phi_{\mathbf{x}_0}$在任意不包含$\mathbf{x}_0$ 的区域 是调和函数。此外对任意调和函数u，存在一个解析函数$\omega : \mathbb{C} \rightarrow\mathbb{C}  $ 使得$u(x,y) = Re(\omega(x,y))$, 并且在不考虑相差一个常量时$\omega$是唯一的。在本文剩余部分，我们考虑解析函数时，将不对二维点$(x,y) \in \mathbb{R}^2$和复数点$x + iy = z \in \mathbb{C}$做区分。
+注明
+$$
+\phi_{\mathbf{x}_0}(\mathbf{x}) = Re(- \log (z - z_0))
+$$
+并且遵循标准做法，我们将$\log (z)$成为由电荷引起的的电势。介于我们将要引入更复杂的表达式，因此我们沿用复表示并将相应的解析函数称为电势。下一个引理是Cauchy-Riemann 方程的直接结果。
+\begin{lemma}
+若$u(x,y) = Re(\omega(x,y))$表示$(x,y)$处的电势，那么对应的力场为
+$$
+\nabla u = (u_x,u_y) = (Re(\omega'),-Im(\omega'))
+$$
+其中$\omega ' $是$\omega  $的导数。
+\end{lemma}
+
+
+下一个引理被用于获得m个电荷产生电势的多极展开。
+
+
+\begin{lemma}
+令带电量为q的点电荷为于$z_0$，对任意z,满足$\abs{z} >\abs{z_o}$，有
+\begin{equation}
+\phi_{z_0}(z) = q \log (z-z_0) = q(log(z) - \sum^{\infty}_{k=1} \frac{1}{k} (\frac{z_0}{z})^k)
+\end{equation}
+\end{lemma}
+\begin{proof}
+注意到对$\abs{z_0 / z} < 1 $有$\log (z-z_0) - \log (z) = \log (1 - z_0 / z)$，于是如下表达式
+$$
+log(1 - \omega) = (-1) \sum^{\infty}_{k=1} \frac{\omega^k}{k}
+$$
+在任意$\abs{\omega} < 1$时成立。
+\end{proof}
+
+\begin{theorem}
+\label{theorem2.1}
+假定m个点电荷强度为$\{q_i, i = 1,\ldots,m\}$分别为于点$\{z_i, i = 1,\ldots,m\}$，其中$\abs{z_i} < r$，那么对于任意z，$\abs{z} > r$，由电荷引起的电势为
+\begin{equation}
+\phi(z) = Q\log(z) + \sum^{\infty}_{k = 1}\frac{a_k}{z^k}\label{2.2}
+\end{equation}
+其中
+\begin{equation}
+Q = \sum^m_{i = 1} q_i  \quad and \quad a_k = \sum^m_{i=1}\frac{-q_i z_i^k}{k} \label{2.3}
+\end{equation}
+进一步有，对任意$p \geq 1$
+\begin{align}
+\abs{\phi(z) - Q\log(z) - \sum^p_{k=1} \frac{a_k}{z^k} }  &\leq \alpha \abs{\frac{r}{z}}^{p+1} \notag \\
+& \leq (\frac{A}{c-1})(\frac{1}{c})^p\label{2.4}
+\end{align}
+其中
+\begin{equation}
+c= \abs{\frac{z}{r}} ,\quad A = \sum^m_{i=1}\abs{q_i},\quad \alpha = \frac{A}{1-\abs{\frac{r}{z}}}  \label{2.5}
+\end{equation}
+\end{theorem}
+
+
+
+\begin{proof}
+多级展开的形式\eqref{2.2}是由上面引理关于各源点直接累加获得，现在来分析误差界\eqref{2.4},观察到
+$$
+\abs{\phi(z) - Q\log(z) - \sum^p_{k=1} \frac{a_k}{z^k} } = \abs{\sum^{\infty}_{k=p+1} \frac{a_k}{z^k}}
+$$
+利用\eqref{2.3}带入可得
+\begin{align*}
+\abs{\sum^{\infty}_{k=p+1}  \frac{a_k}{z^k}} \leq A\sum^{\infty}_{k = p+1}\frac{r^k}{k \abs{z}^k} &\leq A\sum^{\infty}_{k=p+1}\abs{\frac{r}{z}}^k \\
+& = \alpha\abs{\frac{r}{z}}^{p+1} = (\frac{A}{c-1})(\frac{1}{c})^p
+\end{align*}
+这就与上述结论一致了。
+注意到如果$c\geq 2$，则
+\begin{equation}
+\abs{\phi(z) - Q\log(z) - \sum^p_{k=1} \frac{a_k}{z^k} } \leq A(\frac{1}{2})^p \label{2.6}
+\end{equation}
+\end{proof}
+
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{fig1.jpg}
+\end{figure}
+最后，我们用一个简单的例子说明多极展开可以加速电势场的运算。考虑电荷带电量为$q_1,q_2,\ldots,q_m$分别为于点$x_1,x_2,\ldots,x_m \in \mathbb{C}$并且$\{y_1,y_2,\ldots,y_n\}$是另一组点(见fig1).我们说点集$\{x_i\}$与$\{y_i\}$是well separated ,如果存在点$x_0,y_0 \in \mathbb{C}$以及实数$r > 0$使得
+\begin{align*}
+\abs{x_i - x_0} & < r   \qquad for \  all \  i = 1,\ldots,m \\
+\abs{y_j - y_0} & < r   \qquad for \  all \  j = 1,\ldots,n \\
+\abs{x_0 - y_0} & > 3r
+\end{align*}
+
+
+为了从点$\{x_i\}$直接获取点$\{y_i\}$处的电势（或力），我们可以计算
+\begin{equation}
+\sum^m_{i=1} \phi_{x_i} (y_i) \quad for \ all \ j = 1,\ldots,n
+\end{equation}
+这显然需要nm阶的工作量。现在假定我们利用Theorem\ref{theorem2.1}先计算$x_0$的各个电荷的p次多极展开式系数，这需要mp步。计算$y_i$处的多级展开式的值需要np 步，于是总工作量就是$O(mp+np)$ 阶的。进一步，利用\eqref{2.6}
+$$
+\abs{\sum^m_{i=1}\phi_{x_i}(y_i) - Q\log(y_j-x_0) - \sum^p_{k=1} \frac{a_k}{\abs{y_j - x_0}^k} } \leq A(\frac{1}{2})^p
+$$
+然后，为了获得对应的精度$\epsilon$,我们需要令p为$-\log_2 (\epsilon)$ 阶的。一旦精度明确了，总的计算量就减少为
+$$
+O(m) + O(n)
+$$
+对较大的n，m而言，这就远远小于nm的工作量。
+
+\begin{enumerate}[1)]
+\item 算子平移与误差界
+
+接下来的三个引理是本文的主要分析工具，让我们操作多极展开式用以快速算法。Lemma\ref{lemma2.3}提供一种平移展开式中心的算法。Lemma\ref{lemma2.4}展示如何将展开式在在一个解析性的圆形区域转化为局部Taylor 展开。Lemma\ref{lemma2.5} 提供了一种在分析区域内移动泰勒展开中心的机制。我们还导出了与这些平移算子相关联的误差界，使我们能够对任何指定的精度进行数值计算。
+
+
+\begin{lemma}
+\label{lemma2.3}
+假定
+\begin{equation}
+\phi(z) = a_0 \log(z - z_0) + \sum^{\infty}_{k=1} \frac{a_k}{(z-z_0)^k} \label{2.8}
+\end{equation}
+为m个强度为$q_1,q_2,\ldots,q_m$的电荷在以$z_0$ 为圆心，R 为半径的圆D内形成的电势的多极展开。对于以$R+\abs{z_0}$ 为半径，原点为中心的圆$D_1$,z 落在其外，有
+\begin{equation}
+\phi(z) = a_0 \log (z) + \sum^{\infty}_{l = 1}\frac{b_l}{z^l}\label{2.9}
+\end{equation}
+其中
+\begin{equation}
+b_l = -\frac{a_0z_0^l}{l} + \sum^{l}_{k=1}a_k z^{l-k}_0 \binom{l-1}{k-1} \label{2.10}
+\end{equation}
+其中$\binom{l}{k}$表示二项式系数。进一步，对任意$p \geq 1$，
+\begin{equation}\label{2.11}
+\abs{\phi(z) - a_0 \log (z) + \sum^{p}_{l = 1}\frac{b_l}{z^l}} \leq (\frac{A}{1-\abs{\frac{\abs{z_0}+R}{z}}})\abs{\frac{\abs{z_0}+R}{z}}^{p+1}
+\end{equation}
+其中A如\eqref{2.5}所定义。
+\end{lemma}
+
+\begin{proof}
+平移后的展开式系数\eqref{2.9}是由\eqref{2.8}关于$z_0$Taylor 展开得到的。对于误差界\eqref{2.11}，观察到$\{b_l\}$是圆 D 中包含电荷的唯一多级展开式的系数，于是由Theorem\ref{theorem2.1}中$\abs{z_0} + R$替换r 即可的。
+\end{proof}
+
+
+\emph{Remark.}   展开式\eqref{2.8}中关于$z_0$的值$\{a_1,a_2,\ldots,a_p\}$被求出，我们就可以由\eqref{2.10} 得到$\{b_1,b_2,\ldots,b_p\}$。换言之，我们不必牺牲计算精度就可以平移截断的多级展开式中心。
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{fig2.jpg}
+\end{figure}
+
+\begin{lemma}
+\label{lemma2.4}
+假定m个强度为$q_1,q_2,\ldots,q_m$的电荷分布在以 $z_0$ 为圆心，R为半径的圆$D_1$ 内，$\abs{z_0} > (c+1)R , c >1$(fig2). 那么\eqref{2.8}在半径为R，原点为圆心的圆$D_2$ 内收敛。在$D_2$内，由电荷引起的电势可由幂级数表示
+\begin{equation}
+\phi (z) = \sum^{\infty}_{l=1} b_l \cdot z^l \label{2.12}
+\end{equation}
+其中
+\begin{equation}
+b_0 = a_0 \log(-z_0) + \sum^{\infty}_{k=1}\frac{a_k}{z^k_0} (-1)^{k}
+\end{equation}
+以及
+\begin{equation}
+b_l = -\frac{a_0}{l \cdot z^l_0} + \frac{1}{z^l_0} \sum^{\infty}_{k=1}\frac{a_k}{z_0^k} \binom{l+k-1}{k-1}(-1)^k, \quad for\  l \geq 1
+\end{equation}
+进一步，对任意$p\geq \max (2,2c/(c-1))$，截断误差为:
+\begin{equation}
+\abs{\phi(z) - \sum^{p}_{l=1} b_l \cdot z^l} < \frac{A(4e(p+c)(c+1)+c^2)}{c(c-1)} (\frac{1}{c})^{p+1} \label{2.15}
+\end{equation}
+其中A如\eqref{2.5}定义，e是自然对数的底。
+\end{lemma}
+
+\begin{proof}
+我们利用Maclaurin定理从展开式\eqref{2.8} 获得
+\eqref{2.12},为了获得误差界\eqref{2.15},我们令$\gamma_0 = a_0\log (-z_0) , \gamma_l = -(a_0 / l \cdot z^l_0)\  for\  l \geq 1$以及$\beta_l = b_l - \gamma_l \ for  \  l \geq 0 $。 于是
+\begin{equation}
+\abs{\phi(z) - \sum^p_{l=0} b_l \cdot z^l} = \abs{\sum^{\infty}_{l = p+1} b_l \cdot z^l} \leq S_1 + S_2
+\end{equation}
+其中
+$$
+S_1 = \abs{\sum^{\infty}_{ l= p+1}  \gamma_l \cdot z^l} ,\quad S_2 = \abs{\sum^{\infty}_{ l= p+1}  \beta_l \cdot z^l}
+$$
+$S_1$的界如下可得
+\begin{align*}
+S_1 & = \abs{\sum^{\infty}_{ l= p+1}  \gamma_l  z^l} \leq \abs{a_0} \sum^{\infty}_{l = p+1} \frac{z^l}{l \cdot z^l_0} \leq A \sum^{\infty}_{l = p+1} \frac{z^l}{l \cdot z^l_0}\\
+& = A \sum^{\infty}_{l = p+1}\left( \frac{1}{c+1}\right)^l < A \sum^{\infty}_{l = p+1}\left( \frac{1}{c}\right)^l = \left( \frac{A}{c-1}\right)\left( \frac{1}{c}\right)^p
+\end{align*}
+
+为了获得$S_2$的界，我们令C为半径为s的圆，其中$s = cR((p-1)/p)$(fig2)，注意到对任意$p \geq 2c/(c-1)$
+$$
+R< \frac{cR + R}{2} < s <cR
+$$
+定义函数$\phi_1 : \mathbb{C} \backslash D_1 \rightarrow \mathbb{C}$
+$$
+\phi_1 (z) = \phi(z) - a_0 \cdot \log (z-z_0)
+$$
+然后利用复解析函数的Taylor定理 [6, p. 190]，我们有
+\begin{align*}
+S_2 & = \abs{\phi_1 (z) - \sum^p_{l= 0} \beta_l z^l} = \abs{\sum^{\infty}_{l = p+1} \beta_l z^l} \\
+& \leq M \left/ (1-\frac{\abs{z}}{s}) (\frac{\abs{z}}{s})^{p+1} \right.
+\end{align*}
+其中
+$$
+M = \max_C \abs{\phi_1 (t)}
+$$
+显然对任意C中的t
+$$
+\abs{\phi_1(t)} \leq \sum^{\infty}_{k=1} \abs{\frac{a_k}{(t-z_0)^k}}
+$$
+并且可以得到
+$$
+\abs{a_k} \leq AR^k \quad \abs{t-z_0} \geq R+cR-s = R+cR/p
+$$
+经过一些代数运算，我们有
+$$
+M \leq A\left( \frac{pR+cR}{cR}\right) \quad 1-\frac{\abs{z}}{s} \geq \frac{cR-R}{cR+R}
+$$
+观察到对任意正整数n以及整数$p\geq 2$
+$$
+\left( 1+\frac{1}{n}\right)^n \leq e \quad \left( 1+\frac{1}{p-1}\right)^2 \leq 4
+$$
+\begin{align*}
+S_2 & \leq \frac{A(pR+cR)(cR+R)}{cR(cR-R)} \bracket{\frac{\abs{z}}{cR}}^{p+1} \bracket{\frac{p}{p-1}}^{p+1}\\
+&  \leq \frac{A(p+c)(c+1)}{c(c-1)}\bracket{\frac{1}{c}}^{p+1} \bracket{1+\frac{1}{p-1}}^{p-1}  \bracket{ 1 +  \frac{1}{p-1} }^2 \\
+& \leq\frac{4Ae(p+c)(c+1)}{c(c-1)} \bracket{\frac{1}{c}}^{p+1}
+\end{align*}
+将最后的式子与$S_1$误差界结合即可得结果。
+\end{proof}
+
+下面的引理是Maclaurin定理的直接结果。 它描述了一个具有有限项展开式的精确平移操作，并且不需要误差界。
+\begin{lemma}
+\label{lemma2.5}
+对任意复数$z_0,z$与$\{a_k\}，k = 0,1,\ldots,n$
+\begin{equation}
+\sum^n_{k=0}a_k (z- z_0)^k = \sum^n_{l=0} \bracket{\sum^n_{k=l} a_k \binom{k}{l} (-z_0) ^{k-l}} z^l .
+\end{equation}
+\end{lemma}
+
+\end{enumerate}
+
+
+
+\subsection{快速多极算法}
+在本节中，我们给出一种基于电荷分布求出电势或电场的快速算法。使用的主要技巧是将粒子分为不同距离的点簇然后通过多级展开计算那些充分远的粒子间的相互作用。而那些离得近的粒子间的相互作用就直接计算。
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{fig3.jpg}
+\end{figure}
+
+
+更具体地说，让我们考虑如fig3所示的计算区域。它是边长为1 的正方形，中心位于原点，并假定这个区域包含了所有N个粒子。8个相邻的区域也被画出，并且在下一节中考虑边界条件时被用到。首先我们考虑free-space问题，即边界可以被忽略且只有粒子间的相互作用需要被考虑进去。
+
+
+给定一个精度$\epsilon$，我们选取$p \approx \log_2 (\epsilon)$并且明确没有well-separated的粒子簇间的相互作用不会被计算。这些条件与$c = 2$ 是满足误差界
+\eqref{2.4}、\eqref{2.11} 和\eqref{2.15}所需要的。此时截断误差为$2^{-p}$，也就满足了我们想要的误差。为了满足这个条件，我们引入一个将计算区域细分为更小区域的划分方法（fig4）.划分的第0层即为整个方形区域，第l+1层是由第l层通过等分为4个区域得来的。在第l层的方块数为$4^l$。我们利用树结构描述这个分层结构，因此如果第l层有一个区域
+\emph{ibox}，那么l+1层的四个方块就视为\emph{ibox}的子树。
+
+假定我们
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{fig4.jpg}
+\end{figure}
+
+其他算法中使用的记号如下
+\begin{description}
+\item[$\Phi_{li}$]
+由第l层第i个方形区域内的粒子产生的电势场的p 阶多级展开（关于该区域中心展开）
+\item[$\Psi_{l,i}$]
+由第l层第i个方形区域以及其近邻区域外的粒子产生的电势场的p 阶展开式。
+\item[$\tilde{\Psi}_{l,i}$]
+关于第l层第i个方形区域的局部展开，描述了由该方块的父区域以及父区域近邻区域内粒子产生的电势。
+\item[\emph{Interaction list}]
+对第l层第i个方形区域，这指的是其父区域的近邻的子区域中，与它well-separated的部分。（fig5）
+\end{description}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{fig5.jpg}
+\end{figure}
+
+
+假定我们已经得到了第l-1层的所有局部展开$\Psi_{l-1,i}$，于是应用lemma\ref{lemma2.5}可以将展开式$\Psi_{l-1,i}$平移至各个区域i的子区域中心，于是我们有，对任意第l层的区域j，我们获得了其父区域近邻外的所有粒子产生的电势展开式$\tilde{\Psi}_{l,i}$.因此需要在$\tilde{\Psi}_{l,i}$中加上Interaction list那部分才能获得$\Psi_{l,i}$。这一步需要应有lemma\ref{lemma2.4}将Interaction list区域中的多级展开转化为关于当前区域的局部展开并将其加至先前由其父区域得到的展开式上。注意到对于free-space问题，$\Psi_{0,i}$与$\Psi_{1,i}$ 都是0因为它们都没有well-separated的部分,于是我们可以从第二层开始构建局部展开。下面是算法的一个流程描述。
+
+
+ALGORITHM.
+\begin{description}
+\item[Initialization] \hfill \\
+ 取细分的层数$n \approx \log_4 N$，精度$\epsilon$, 并设$p \approx \log_2 (\epsilon)$
+
+
+\item[Upward Pass] \hfill \\
+\begin{center}
+\textbf{Step 1}
+\end{center}
+
+    \begin{description}
+    \item[Comment] [在最下层，关于各个区域中心求出内部粒子产生电势的多级展开]
+    \item[do] \emph{ibox} = $1,\ldots,4^n$ \\
+    应用Theorem 2.1求出p阶多级展开$\Phi_{n,ibox}$
+    \item[enddo]
+    \end{description}
+
+
+\begin{center}
+\textbf{Step 2}
+\end{center}
+    \begin{description}
+    \item[Comment] [求出关于更上层区域中心的多级展开，每个展开式表示一个区域中各个粒子产生的电势场]
+     \item[do] $l = n-1 ,\ldots ,0$
+        \begin{description}
+        \item[do] \emph{ibox} = $1,\ldots,4^l$ \\
+            应用Lemma\ref{lemma2.3}将子区域的p阶多级展开平移至当前父区域中心并将它们相加，得到$\Phi_{l,ibox}$
+         \item[enddo]
+        \end{description}
+     \item[enddo]
+    \end{description}
+    
+
+\item[Downward Pass] \hfill \\
+
+    \begin{description}
+    \item[Comment] [在这一部分，相互作用总是在尽可能高的层上考虑。给定一个区域，这一步通过将well-separated部分和那些未被计算进来的父区域相加完成。]
+    \end{description}
+    \begin{center}
+    \textbf{Step 3}
+    \end{center}
+    
+    \begin{description}
+    \item[Comment] [在每个第l层（$l \leq n-1$），关于各个区域中心构建局部展开。这部分局部展开描述的电势是由所有在当前区域及其近邻外的粒子产生的。一旦局部展开被求出，就将其平移至下一层对应子区域的中心，此后这些展开式将作为下一轮循环的父展开式。]
+    \item[Set] $\tilde{\Psi}_{1,1} = \tilde{\Psi}_{1,2} = \tilde{\Psi}_{1,3} = \tilde{\Psi}_{1,4} = (0,\ldots,0)$
+    \item[do] $l = 1,\ldots,n-1$
+        \begin{description}
+        \item[do] \emph{ibox} = $1,\ldots,4^l$\\
+            利用lemma\ref{lemma2.4}将
+            \emph{ibox}的Interaction list中的多级展开$\Phi_{l,j}$ 转化为当前区域的局部展开，将他们各个相加，最后加上$\tilde{\Psi}_{l,ibox}$得到$\Psi_{l,ibox}$
+        \item[enddo]
+        \item[do] \emph{ibox} = $1,\ldots,4^l$ \\
+        应用lemma\ref{lemma2.5}将$\Psi_{l,box}$扩展至其子区域的中心以获得\emph{ibox}各个子区域的展开式$\tilde{\Psi}_{l+1,j}$
+        \item[enddo]
+        \end{description}
+    \item[enddo]
+    \end{description}
+    
+    \begin{center}
+    \textbf{Step 4}
+    \end{center}
+\end{description}
+
+\section{外文原文}
+
+\includepdf[pages = -]{1.pdf}
+
+\begin{thebibliography}{9}
+\bibitem{1}Rick Beatson,Leslie Greengard.A short course on fast multipole methods.Wavelets, Multilevel Methods and Elliptic PDEs,1997,1-37.
+\end{thebibliography}
+\addcontentsline{toc}{section}{参考文献}
+
+\end{document}
