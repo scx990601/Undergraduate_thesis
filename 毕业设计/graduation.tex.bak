@@ -19,7 +19,8 @@
 \usepackage{layout}
 \usepackage{setspace}
 \usepackage{pdfpages}
-
+\usepackage{caption}
+\usepackage{subcaption}
 
 
 % some common command
@@ -118,7 +119,7 @@
 \section{开题报告}
 ······························
 \section{外文翻译}
-我们给出了一种快速评估包含多个粒子的系统的势能或场强的算法。更具体地说，我们考虑的是粒子间相互作用表现为自然界中库仑力或引力的形式。对于N个粒子的系统，一般需要$O(N^2)$ 的工作量来评估其相互作用，除非用一些近似或截断的方法。本文所用方法在给定误差内工作量与N成正比，使得在电磁物理学、流体力学、分子动力学和天体力学中的大规模计算更为可行。
+我们给出了一种快速评估包含多个粒子的系统的势能或场强的算法。更具体地说，我们考虑的是粒子间相互作用表现为自然界中库仑力或引力的形式。对于N 个粒子的系统，一般需要$O(N^2)$ 的工作量来评估其相互作用，除非用一些近似或截断的方法。本文所用方法在给定误差内工作量与N成正比，使得在电磁物理学、流体力学、分子动力学和天体力学中的大规模计算更为可行。
 
 
 
@@ -132,17 +133,17 @@
 $$
 m_i \frac{\dif^2 x_i }{\dif t^2} = - \nabla_i \Phi \quad for \  i = 1,\ldots,N
 $$
-其中$m_i$为第i个粒子的质量，然后力从势函数$\Phi$的梯度中获得。若我们对平衡时的情况更感兴趣而不是他们随时间变换的性质，我们可以需用Monte-Carlo法。在这个例子中，势函数$\Phi$包含大量粒子的计算，力图求出其最小值。
+其中$m_i$为第i个粒子的质量，然后力从势函数$\Phi$ 的梯度中获得。若我们对平衡时的情况更感兴趣而不是他们随时间变换的性质，我们可以需用Monte-Carlo 法。在这个例子中，势函数$\Phi$包含大量粒子的计算，力图求出其最小值。
 
 
 这篇文章中，我们只关注势能或力由一系列相互关系加和而成的情况。更具体地说，我们考虑的势有如下形式
 $$
 \Phi = \Phi_{far} + ( \Phi_{near} + \Phi_{external} )
 $$
-其中$\Phi_{near} $这一部分会快速衰减，$\Phi_{external}$ 这部分与粒子数量无关，$\Phi_{far}$这部分远场势是库伦或重力势。这类模型表述了许多天体物理、电磁物理学和分子动力学中的问题。在不可压缩流体的涡方法计算中，一个重要且昂贵的部分也有相同的结构（流量函数与涡旋是由Poisson 方程相关联的）。
+其中$\Phi_{near} $这一部分会快速衰减，$\Phi_{external}$ 这部分与粒子数量无关，$\Phi_{far}$ 这部分远场势是库伦或重力势。这类模型表述了许多天体物理、电磁物理学和分子动力学中的问题。在不可压缩流体的涡方法计算中，一个重要且昂贵的部分也有相同的结构（流量函数与涡旋是由Poisson 方程相关联的）。
 
 
-在N个粒子的系统中，$\Phi_{near}$需要与N成正比的计算量，$\Phi_{external}$也类似。但是库伦或重力势的衰减慢到要求我们计算所有的相互关系，这就导致CPU运算量达到$O(N^2)$ 阶。本文介绍的快速算法计算所有粒子间的相互关系只要$O(N)$阶。
+在N个粒子的系统中，$\Phi_{near}$需要与N成正比的计算量，$\Phi_{external}$ 也类似。但是库伦或重力势的衰减慢到要求我们计算所有的相互关系，这就导致CPU运算量达到$O(N^2)$ 阶。本文介绍的快速算法计算所有粒子间的相互关系只要$O(N)$阶。
 
 
 先前已有很多关于减少N-体问题计算量的研究工作。Particle-in-cell methods [5]被仔细研究并成功应用，尤其在电磁物理学领域中。假定电势满足Poisson方程，计算区域被均匀网格划分，该方法有：
@@ -156,7 +157,7 @@ $$
 该方法的复杂度为$O(N+M\log M)$，其中M为网格点的个数。网格点的个数通常与粒子个数成比例，但是差一个小比例常数使得$M << N$。因此该方法渐进复杂度为$O (N \log N)$，实际中计算量通常被视为与N成比例。不幸的是，网格分割提供了有限的精度，高度不均匀的源点分布会导致性能降低。第三步中的数值微分将进一步的引入误差。
 
 
-为了改进particle-in-cell的计算，近距离的相互作用可以通过直接结算获得，而远距离的相互关系通过网格划分获得，就得到了所谓particle-particle/particle-mesh（$P^3 M$）方法。将此方法引用在涡旋计算中，见[1].然而，这些方法的性能都依赖于一种较为均匀分布的前提下，理论上确实可以允许获取任意高的精度。通常，若我们要求的精度相对低一些，这些粒子在某个矩形区域分布的均匀一些或不均匀一些都能通过$P^3 M$ 获得较为满意的结果。但若要求高精度（例如一些高度相关系统的建模中），运算时间就变得过多了。
+为了改进particle-in-cell的计算，近距离的相互作用可以通过直接结算获得，而远距离的相互关系通过网格划分获得，就得到了所谓particle-particle/particle-mesh （$P^3 M$）方法。将此方法引用在涡旋计算中，见[1].然而，这些方法的性能都依赖于一种较为均匀分布的前提下，理论上确实可以允许获取任意高的精度。通常，若我们要求的精度相对低一些，这些粒子在某个矩形区域分布的均匀一些或不均匀一些都能通过$P^3 M$ 获得较为满意的结果。但若要求高精度（例如一些高度相关系统的建模中），运算时间就变得过多了。
 
 
 Appel[2]介绍了一种“无网格”方法用于多体问题的计算，计算复杂度估计为$O(N \log N)$。该方法依赖于单极点（质量中心）近似用于计算远距离的力以及一些复杂的数据结构来追踪那些粒子簇成一团以使得近似计算有效。对特定类型的问题，该方法与单纯$O(N^2)$方法比有显著的加速。当粒子相对均匀与所需精度很高时性能就下降了。
@@ -184,6 +185,7 @@ $$
 $$
 并且遵循标准做法，我们将$\log (z)$成为由电荷引起的的电势。介于我们将要引入更复杂的表达式，因此我们沿用复表示并将相应的解析函数称为电势。下一个引理是Cauchy-Riemann 方程的直接结果。
 \begin{lemma}
+\label{lemma2.1}
 若$u(x,y) = Re(\omega(x,y))$表示$(x,y)$处的电势，那么对应的力场为
 $$
 \nabla u = (u_x,u_y) = (Re(\omega'),-Im(\omega'))
@@ -233,7 +235,7 @@ c= \abs{\frac{z}{r}} ,\quad A = \sum^m_{i=1}\abs{q_i},\quad \alpha = \frac{A}{1-
 
 
 \begin{proof}
-多级展开的形式\eqref{2.2}是由上面引理关于各源点直接累加获得，现在来分析误差界\eqref{2.4},观察到
+多级展开的形式\eqref{2.2}是由上面引理关于各源点直接累加获得，现在来分析误差界\eqref{2.4}, 观察到
 $$
 \abs{\phi(z) - Q\log(z) - \sum^p_{k=1} \frac{a_k}{z^k} } = \abs{\sum^{\infty}_{k=p+1} \frac{a_k}{z^k}}
 $$
@@ -267,20 +269,22 @@ $$
 \begin{equation}
 \sum^m_{i=1} \phi_{x_i} (y_i) \quad for \ all \ j = 1,\ldots,n
 \end{equation}
-这显然需要nm阶的工作量。现在假定我们利用Theorem\ref{theorem2.1}先计算$x_0$的各个电荷的p次多极展开式系数，这需要mp步。计算$y_i$处的多级展开式的值需要np 步，于是总工作量就是$O(mp+np)$ 阶的。进一步，利用\eqref{2.6}
+这显然需要nm阶的工作量。现在假定我们利用Theorem\ref{theorem2.1}先计算$x_0$的各个电荷的p 次多极展开式系数，这需要mp步。计算$y_i$处的多级展开式的值需要np 步，于是总工作量就是$O(mp+np)$ 阶的。进一步，利用\eqref{2.6}
 $$
 \abs{\sum^m_{i=1}\phi_{x_i}(y_i) - Q\log(y_j-x_0) - \sum^p_{k=1} \frac{a_k}{\abs{y_j - x_0}^k} } \leq A(\frac{1}{2})^p
 $$
-然后，为了获得对应的精度$\epsilon$,我们需要令p为$-\log_2 (\epsilon)$ 阶的。一旦精度明确了，总的计算量就减少为
+然后，为了获得对应的精度$\epsilon$,我们需要令p 为$-\log_2 (\epsilon)$
+阶的。一旦精度明确了，总的计算量就减少为
 $$
 O(m) + O(n)
 $$
+
 对较大的n，m而言，这就远远小于nm的工作量。
 
 \begin{enumerate}[1)]
 \item 算子平移与误差界
 
-接下来的三个引理是本文的主要分析工具，让我们操作多极展开式用以快速算法。Lemma\ref{lemma2.3}提供一种平移展开式中心的算法。Lemma\ref{lemma2.4}展示如何将展开式在在一个解析性的圆形区域转化为局部Taylor 展开。Lemma\ref{lemma2.5} 提供了一种在分析区域内移动泰勒展开中心的机制。我们还导出了与这些平移算子相关联的误差界，使我们能够对任何指定的精度进行数值计算。
+接下来的三个引理是本文的主要分析工具，让我们操作多极展开式用以快速算法。Lemma\ref{lemma2.3}提供一种平移展开式中心的算法。Lemma\ref{lemma2.4} 展示如何将展开式在在一个解析性的圆形区域转化为局部Taylor 展开。Lemma\ref{lemma2.5} 提供了一种在分析区域内移动泰勒展开中心的机制。我们还导出了与这些平移算子相关联的误差界，使我们能够对任何指定的精度进行数值计算。
 
 
 \begin{lemma}
@@ -305,11 +309,13 @@ b_l = -\frac{a_0z_0^l}{l} + \sum^{l}_{k=1}a_k z^{l-k}_0 \binom{l-1}{k-1} \label{
 \end{lemma}
 
 \begin{proof}
-平移后的展开式系数\eqref{2.9}是由\eqref{2.8}关于$z_0$Taylor 展开得到的。对于误差界\eqref{2.11}，观察到$\{b_l\}$是圆 D 中包含电荷的唯一多级展开式的系数，于是由Theorem\ref{theorem2.1}中$\abs{z_0} + R$替换r 即可的。
+平移后的展开式系数\eqref{2.9}是由\eqref{2.8}关于$z_0$Taylor 展开得到的。对于误差界\eqref{2.11}，观察到$\{b_l\}$是圆 D 中包含电荷的唯一多级展开式的系数，于是由Theorem\ref{theorem2.1}中$\abs{z_0} + R$
+替换r 即可的。
 \end{proof}
 
 
-\emph{Remark.}   展开式\eqref{2.8}中关于$z_0$的值$\{a_1,a_2,\ldots,a_p\}$被求出，我们就可以由\eqref{2.10} 得到$\{b_1,b_2,\ldots,b_p\}$。换言之，我们不必牺牲计算精度就可以平移截断的多级展开式中心。
+\emph{Remark.}   展开式\eqref{2.8}中关于$z_0$的值$\{a_1,a_2,\ldots,a_p\}$被求出，我们就可以由
+\eqref{2.10} 得到$\{b_1,b_2,\ldots,b_p\}$。换言之，我们不必牺牲计算精度就可以平移截断的多级展开式中心。
 
 \begin{figure}[h]
 \centering
@@ -318,7 +324,7 @@ b_l = -\frac{a_0z_0^l}{l} + \sum^{l}_{k=1}a_k z^{l-k}_0 \binom{l-1}{k-1} \label{
 
 \begin{lemma}
 \label{lemma2.4}
-假定m个强度为$q_1,q_2,\ldots,q_m$的电荷分布在以 $z_0$ 为圆心，R为半径的圆$D_1$ 内，$\abs{z_0} > (c+1)R , c >1$(fig2). 那么\eqref{2.8}在半径为R，原点为圆心的圆$D_2$ 内收敛。在$D_2$内，由电荷引起的电势可由幂级数表示
+假定m个强度为$q_1,q_2,\ldots,q_m$的电荷分布在以 $z_0$ 为圆心，R为半径的圆$D_1$ 内，$\abs{z_0} > (c+1)R , c >1$(fig2). 那么\eqref{2.8}在半径为R，原点为圆心的圆$D_2$ 内收敛。在$D_2$ 内，由电荷引起的电势可由幂级数表示
 \begin{equation}
 \phi (z) = \sum^{\infty}_{l=1} b_l \cdot z^l \label{2.12}
 \end{equation}
@@ -421,7 +427,7 @@ S_2 & \leq \frac{A(pR+cR)(cR+R)}{cR(cR-R)} \bracket{\frac{\abs{z}}{cR}}^{p+1} \b
 
 给定一个精度$\epsilon$，我们选取$p \approx \log_2 (\epsilon)$并且明确没有well-separated的粒子簇间的相互作用不会被计算。这些条件与$c = 2$ 是满足误差界
 \eqref{2.4}、\eqref{2.11} 和\eqref{2.15}所需要的。此时截断误差为$2^{-p}$，也就满足了我们想要的误差。为了满足这个条件，我们引入一个将计算区域细分为更小区域的划分方法（fig4）.划分的第0层即为整个方形区域，第l+1层是由第l层通过等分为4个区域得来的。在第l层的方块数为$4^l$。我们利用树结构描述这个分层结构，因此如果第l层有一个区域
-\emph{ibox}，那么l+1层的四个方块就视为\emph{ibox}的子树。
+\emph{ibox}，那么l+1层的四个方块就视为\emph{ibox} 的子树。
 
 假定我们
 \begin{figure}[h]
@@ -447,9 +453,9 @@ S_2 & \leq \frac{A(pR+cR)(cR+R)}{cR(cR-R)} \bracket{\frac{\abs{z}}{cR}}^{p+1} \b
 \end{figure}
 
 
-假定我们已经得到了第l-1层的所有局部展开$\Psi_{l-1,i}$，于是应用lemma\ref{lemma2.5}可以将展开式$\Psi_{l-1,i}$平移至各个区域i的子区域中心，于是我们有，对任意第l层的区域j，我们获得了其父区域近邻外的所有粒子产生的电势展开式$\tilde{\Psi}_{l,i}$.因此需要在$\tilde{\Psi}_{l,i}$中加上Interaction list那部分才能获得$\Psi_{l,i}$。这一步需要应有lemma\ref{lemma2.4}将Interaction list区域中的多级展开转化为关于当前区域的局部展开并将其加至先前由其父区域得到的展开式上。注意到对于free-space问题，$\Psi_{0,i}$与$\Psi_{1,i}$ 都是0因为它们都没有well-separated的部分,于是我们可以从第二层开始构建局部展开。下面是算法的一个流程描述。
+假定我们已经得到了第l-1层的所有局部展开$\Psi_{l-1,i}$，于是应用lemma\ref{lemma2.5}可以将展开式$\Psi_{l-1,i}$平移至各个区域i的子区域中心，于是我们有，对任意第l层的区域j，我们获得了其父区域近邻外的所有粒子产生的电势展开式$\tilde{\Psi}_{l,i}$.因此需要在$\tilde{\Psi}_{l,i}$中加上Interaction list那部分才能获得$\Psi_{l,i}$。这一步需要应有lemma\ref{lemma2.4}将Interaction list 区域中的多级展开转化为关于当前区域的局部展开并将其加至先前由其父区域得到的展开式上。注意到对于free-space问题，$\Psi_{0,i}$与$\Psi_{1,i}$ 都是0因为它们都没有well-separated的部分,于是我们可以从第二层开始构建局部展开。下面是算法的一个流程描述。
 
-
+\newpage
 ALGORITHM.
 \begin{description}
 \item[Initialization] \hfill \\
@@ -482,7 +488,7 @@ ALGORITHM.
         \end{description}
      \item[enddo]
     \end{description}
-    
+
 
 \item[Downward Pass] \hfill \\
 
@@ -492,7 +498,7 @@ ALGORITHM.
     \begin{center}
     \textbf{Step 3}
     \end{center}
-    
+
     \begin{description}
     \item[Comment] [在每个第l层（$l \leq n-1$），关于各个区域中心构建局部展开。这部分局部展开描述的电势是由所有在当前区域及其近邻外的粒子产生的。一旦局部展开被求出，就将其平移至下一层对应子区域的中心，此后这些展开式将作为下一轮循环的父展开式。]
     \item[Set] $\tilde{\Psi}_{1,1} = \tilde{\Psi}_{1,2} = \tilde{\Psi}_{1,3} = \tilde{\Psi}_{1,4} = (0,\ldots,0)$
@@ -508,11 +514,228 @@ ALGORITHM.
         \end{description}
     \item[enddo]
     \end{description}
-    
+
     \begin{center}
     \textbf{Step 4}
     \end{center}
+
+    \begin{description}
+    \item[Comment] [求出最下层的相互作用]
+    \item[do] \emph{ibox} = $1,\ldots,4^n$ \\
+    应用lemma\ref{lemma2.4}将区域j的Interaction list 内的区域的多级展开$\Phi_{l,j}$转化为对应中心的局部展开，将它们相加，最后加上$\tilde{\Psi}_{l,ibox}$以求出$\Psi_{l,ibox}$
+    \item[enddo]
+    \item[Comment] [现在，最下层的局部展开已经可用了。它们可以用以计算某个区域近邻外的所有粒子产生的电势或力场。]
+    \end{description}
+
+    \begin{center}
+    \textbf{Step 5}
+    \end{center}
+    \begin{description}
+    \item[Comment] [在各个粒子的位置计算局部展开]
+    \item[do] \emph{ibox} = $1,\ldots,4^n$ \\
+    对每个为于\emph{ibox}内$z_j$点处的粒子$p_j$，计算$\Phi_{n,ibox} (z_j)$
+    \item[enddo]
+    \end{description}
+
+    \begin{center}
+    \textbf{Step 6}
+    \end{center}
+
+    \begin{description}
+    \item[Comment] [直接计算近邻区域内的电势或力场]
+    \item[do] \emph{ibox} = $1,\ldots,4^n$\\
+    对每个位于区域\emph{ibox}内的粒子$p_j$，计算它与各个位于ibox及其近邻内粒子的相互作用。
+    \item[enddo]
+    \end{description}
+
+    \begin{center}
+    \textbf{Step 7}
+    \end{center}
+
+    \begin{description}
+    \item[do] \emph{ibox} = $1,\ldots,4^n$\\
+    对每个位于区域\emph{ibox}内的粒子,将直接计算的部分与远场域部分相加。
+    \item[enddo]
+    \end{description}
 \end{description}
+
+
+\emph{Remark.}      每个局部展开式都由p阶多项式的系数来描述。在某个点直接求多项式的值表示电势。但是，根据lemma\ref{lemma2.1},力可以由可解析的导数得到，因此不必进行数值微分。更进一步，由于$\Phi '$的解析性，力的误差界就与
+\eqref{2.4}、\eqref{2.11}和\eqref{2.15}有完全相同的形式。
+
+
+接下来是一个简单的算法复杂性的分析（Table 1）
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{table1.jpg}
+\caption*{Table 1}
+\end{figure}
+
+于是运行时间大约为
+$$
+N(-2a \log_2 (\epsilon) + 56b (\log_2 (\epsilon))^2 + 4.5 d k_n + e)
+$$
+其中a，b，c，d，e都是由计算机系统、语言、实现等决定的常数。
+
+除了渐进时间复杂度，渐进存储空间也是一个数值进程的重要特征。该算法需要$\Phi_{l,j}$和$\Psi_{l,j}$ 被存储，同时还要存点的位置、带电量以及计算的结果（电势或静电力）.介于每层中各区域都有一对p阶多项式$\Phi$ 和$\Psi$与之相关，并且所有其他存储的向量都与N成比例，于是可得算法的渐进存储空间有如下形式
+$$
+(\alpha + \beta p) \cdot N
+$$
+或
+$$
+(\alpha - \beta \log_2 (\epsilon)) \cdot N
+$$
+其中系数$\alpha , \beta$,如前文所说，由计算机系统、语言、实现等决定。在我们的数值实验中，实际的存储空间为(单精度数)
+$$
+(25 - \log_2 (\epsilon)) \cdot N
+$$
+
+\emph{Remark.}      显然，我们在Step 6的复杂度评估中假定一个适当均匀的粒子分布。如果粒子分布高度不均匀，那么我们只需要将粒子数多的区域进行细分。尽管这种描述更复杂，一种自适应的方法需要同时保持精度与计算速度（见[3]）.
+
+
+\subsection{边界条件}
+
+一系列的边界条件被应用在做粒子模拟的时候，包括周期性边界条件、齐次的Dirichlet或Neumann条件，含有一些混合条件。我们先详细讲周期边界条件，再将Dirichlet条件，最后简单讨论一下其他条件。
+
+
+\begin{enumerate}[1.]
+\item \emph{周期性边界条件} \\
+我们先考虑fig5中的计算区域。在upward pass 最后，我们求出了一个对整个计算区域的净多级展开
+\begin{equation}
+\Phi_{0,1}(z) = \sum^p_{k=1} \frac{a_k}{z^k}
+\end{equation}
+这就是各个区域中各循环部分关于其中心的展开式。这些循环部分除了fig3中的都被计算区域自己well separated，并且它们诱导的场就是p阶局部多项式，因此$p \approx -\log_2 (\epsilon)$就是满足精度$\epsilon$所需的条件。我们假设周期性粒子模型没有净电荷，于是根据lemma\ref{lemma2.4}获得的局部表示可以被写成
+\begin{equation}
+\Psi_{0,1} = \sum^p_{m=1} b_m \cdot z^m
+\end{equation}
+其中
+\begin{equation}
+b_m = \frac{1}{z_0^m} \sum^p_{k=1} \frac{a_k}{z^k_0} \binom{m+k-1}{k-1} (-1)^k \quad with\ m = 0,1,\ldots,p  \label{4.3}
+\end{equation}
+其中$z_0$是先前循环区域的中心。
+
+
+\emph{Remark.}      在特定问题下（例如宇宙学），计算区域显然无法做到没有净电荷（质量）。这个条件对于电势能被良定义是必要的，因为对数部分在$z_0 \rightarrow \infty$是无界的。但是力的计算有可能仍有意义。实际上，用算法中的记号$\Phi_{l,i} , \Psi_{l,i},\tilde{\Psi}_{l,i}$表示解析的电势展开式，因此它们的导数也是解析函数。更进一步，从Theorem\ref{theorem2.1}得知，导数$\Phi'_{l,i}$是纯逆幂级数。因此根据lemma\ref{lemma2.1}可以用相同的算法结构来计算各处的力场，而绕开对数部分带来的困难。唯一的区别就是初始的展开式是多极展开的导数而不是原来的展开式本身。
+
+
+
+注意到，计算区域中well separated的部分是以$z_0$ 为中心的且$z_0$有整的实部与虚部，其中$Re (z_0) \geq 2 $或$Im \geq 2$。设S为这部分中心点的集合。为了计算所有well-separated部分产生的场,我们通过对所有$z_0 \in S$累加平移后的形如\eqref{4.3} 所示的局部展开系数来获得如下结果
+\begin{equation}
+b^{total}_m = \sum^p_{k=1} a_k \binom{m+k-1}{k-1}(-1)^k \bracket{\sum_{S} \frac{1}{z_0^{m+k}}}
+\end{equation}
+
+
+
+关于S的各个$z_0$的逆幂部分可以被预先计算和存储。对于$(m+k) > 2$级数显然收敛。但对$(m+k) \leq 2$，级数不绝对收敛，计算的值取决于加法的顺序。选取一个合适的累加序列需要基于对物理模型的考虑。
+
+
+
+首先假定模拟中仅有一个单位点电荷为于原点。那么周期性的模型就是一个均匀的电荷晶格并且牛顿第三定律要求每个粒子上净力为零。但是位于原点的粒子的净力对应于$1/z_0$在S上的累加，于是我们令
+$$
+\sum_S \frac{1}{z_0} = 0
+$$
+为了确定二阶项的值
+$$
+\sum_S \frac{1}{z^2_0}
+$$
+我们假定模拟中唯一的粒子是沿x轴方向，位于原点的单位偶极子。于是该模型又是一个均匀晶格并且等价点$(\frac{1}{2},0)$和$(-\frac{1}{2},0)$见电势差一定为零，就是说
+\begin{equation}
+\Phi_{(\frac{1}{2},0)} - \Phi_{(-\frac{1}{2},0)} \equiv \delta\Phi = 0 \label{4.5}
+\end{equation}
+位于$z_0$的单个偶极子对电势差$\delta\Phi$造成的影响为
+$$
+\frac{1}{z_0-1/2}+\frac{1}{z_0 + 1/2} = \frac{1}{z_0^2 -1/4}
+$$
+因此我们发现原点偶极子造成的电势差为-4。对一个$z_0$处的偶极子，$\abs{z_0} \geq 1$,我们可以将上述影响扩张至$\delta\Phi$为
+$$
+\frac{1}{z^2_0 -1/4} = \frac{1}{z^2_0} + \frac{1}{4z^4_0 - z^2_0}
+$$
+现在令S'为所有循环区域的中心，就是说S'表示所有实部和虚部为整数的点$z_0$，除了原点。于是
+$$
+\delta \Phi = -4 +\sum_{S'}\frac{1}{z^2_0} + \sum_{S'}\frac{1}{4z^4_0 - z^2_0}
+$$
+一个有点复杂的计算表明
+$$
+\sum_{S'}\frac{4z^4_0 - z^2_0} = 4 - \pi
+$$
+因此，为了满足\eqref{4.5}，我们令
+$$
+\sum_{S'} = \frac{1}{z^2_0}  = \pi
+$$
+于是
+$$
+\sum_{S'} \frac{1}{z^2_0} = \sum_{S}\frac{1}{z^2_0} + \sum_{S' \backslash S} \frac{1}{z^2_0}
+$$
+而累加$\sum_{S' \backslash S}(1/z^2_0)$易得为零，因此我们有
+$$
+\sum_{S} \frac{1}{z^2_0} = \pi
+$$
+于是在S上$z_0$的逆幂累加就被定义了。
+
+
+将整个计算区域的多级展开$\Phi_{0,1}$转化为局部展开$\Psi_{0,1}$的过程描述了由所有well-separated 区域引起的电场，引用算法中的记号，可以被写作
+$$
+\Psi_{0,1} = T \cdot \Phi_{0,1}
+$$
+其中T是一个p乘p的常矩阵，由如下方法定义
+$$
+T_{m,k} = \binom{m+k-1}{k-1} (-1)^k \bracket{\sum_S \frac{1}{z^{m+k}_0}}
+$$
+
+
+这可以被视为周期性条件的算法downward pass 中的第一步。就此，我们以及考虑了所有相互作用，除了与计算区域直接相邻的那一部分，如fig3所示。但位于计算区域内的展开式$\Phi_{l,i}$ 同样也是其近邻区域对应的展开式。通过将合适的区域加入interaction list，我们保持了原有的计算结构以及相关的计算复杂度。
+
+
+\item \emph{Dirichlet边界条件}\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{fig6.jpg}
+\end{figure}
+
+我们现在考虑齐次Dirichlet条件，也就是
+$$
+\Phi(x,y) = 0 \quad (x,y) \in \partial D
+$$
+其中$\partial D$是计算区域的边界。从分析上讲，这可以通过镜像法来完成，之后将会详细讲。一般的，我们考虑电势差由两部分构成，就是说
+$$
+\Phi = \Phi_{sources} + \Phi_{images}
+$$
+
+其中$\Phi_{sources}$表示计算区域内粒子产生的电势，$\Phi_{images}$表示某些特定位于计算区域外的像区域电荷引起的电势。这些像点电荷与强度依照下面条件选取
+$$
+\Phi_{sources} = - \Phi_{images} \quad for (x,y) \in \partial D
+$$
+
+对于我们考虑计算区域，合适的像点电荷可以通过迭代过程选取，见fig6.我们首先将每个带电量为$\sigma_i$ 的电荷$p_i$通过上面的边界做一次反射，并在对应位置放一个带电量为$-\sigma_i$的电荷，形成一个记为$\bar{C}$的像区域(fig6b)。像点电荷集记为$V_1$，产生的对应电势记为$\Phi_{V_1}$。将$\Phi_{V_1}$加在$\Phi_{sources}$ 上显然可以使上边界满足条件。为了在下边界满足条件，我们需要向下反射所有电荷（包括原点和像点），产生两个新像区域（C和$\bar{C}$的复制）.经过这样的第二次反射后的电荷记为$V_2$。现在$\Phi_{sources}+\Phi_{V_2}$满足下边界的条件。我们因此再次向上反射一次，在加入两个新像区域以及新的像点电荷集记为$V_3$，于是$\Phi_{sources} + \Phi_{V_3}$重新满足上边界条件但又违反了下边界条件。通过上述迭代，我们构成了一个点集列$\{V_i\}$，满足
+$$
+V_1\subset V_2 \subset V_3 \ldots V
+$$
+其中$V = \cup^{\infty}_{i=1}V_i$是包含无穷像区域的一个集合，见fig6c。易得，对应的电场序列$\{\Phi_{V_i}\}$在计算区域内收敛并且$\Phi_{sources} + \Phi_{V}$同时满足上下两个边界条件。
+
+
+为了在另两边满足Dirichlet条件，我们进行一个类似地过程。首先，我们将所有电荷向左边界反射，这样显然不影响上下边界，同时使左边界满足了边界条件。现在，将所有像点电荷记为$H_1$.向右反射构造$H_2$，其中$\Phi_{sources}+\Phi_{H_2}$满足右边界的边界条件。重复上述反射过程得到一个无限集序列$\{H_i\}$满足
+$$
+H_1 \subset H_2 \subset H_3 \subset \ldots H
+$$
+其中$H = \cup^{\infty}_{i=1} H_i$ 是包含于二维像区域族中的点的集合，见fig6d。易得序列$\{\Phi_{H_i}\}$收敛于计算区域内，我们记其极限为$\Phi_H$，最终观察到$\Phi_{sources} + \Phi_H = 0$满足所有边界条件。
+
+
+从计算的角度，反射法的收敛率很不让人满意。但是结合了我们的算法，可以将它转化为极有效的数值工具。用前面的术语说，所有像区域除了计算区域的近邻部分外都well-sperated并且它们产生的场可以用一个局部展开$\Psi_{0,1}$表示。一旦计算了这种局部扩展的系数，我们只需要考虑计算单元本身最近邻内的相互作用。 要做到这一点，就像在周期情况下一样，我们只需将适当的像区域添加到计算区域的Interaction list的中。
+
+
+因此，仍只需计算$\Psi_{0,1}$。我们首先观察到像平面有以$(\frac{1}{2},\frac{1}{2})$为中心的“supercell”,在fig6d中用粗线划出。但是通过上述周期问题的方法，我们可以得到一个关于$(\frac{1}{2},\frac{1}{2})$的展开式，表示supercell的近邻外的所有相互作用。这个展开式可以用lemma\ref{lemma2.5}转化成关于原点的展开式，记为$\tilde{\Psi}_{0,1}$。现在还需要计算那些supercell近邻内的 well-separated的区域。一共有27 个这样的区域，并且它们的多极展开可以被转化为关于原点的局部展开。将它与$\tilde{Psi}_{0,1}$相加得到$\Psi_{0,1}$
+
+
+
+
+\item \emph{其他边界条件}\\
+在特点应用下，我们用周期或Dirichlet条件，同时在另外情况时，Neumann或混合条件也被使用。一个混合边界条件的典型例子就是在计算区域两条相对的边上用到Neumann条件，在另外两条边上用Dirichlet条件。一些其他模型要求左右两边满足周期边界条件，上下满足Dirichlet或Neumann条件。这些条件的问题可以通过一种与上述过程一样的方法来解决。通过反射或周期延拓，先形成全屏幕的像。局部展开$\Psi_{0,1}$通过累加合适的well-separated部分获得，处理剩余的像点的相互作用如上文所示那般处理。
+\end{enumerate}
+
+\subsection{数值实验结果}
+电脑程序已能实现上述算法并能解决free-space问题以及包含周期性边界条件和齐次Dirichlet或Neumann边界条件的问题。
+为了测试目的，我们随机在计算区域内分配了一些点电荷（fig7）
 
 \section{外文原文}
 

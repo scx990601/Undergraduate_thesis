@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2019.1.8)  18 FEB 2021 16:36
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2019.1.8)  19 FEB 2021 15:44
 entering extended mode
 **graduation.tex
 (D:\ctex文件\毕业设计\graduation.tex
@@ -808,230 +808,266 @@ Underfull \hbox (badness 10000) in paragraph at lines 493--494
 
  []
 
-[12] <table1.jpg, id=144, 466.74374pt x 410.2828pt>
-File: table1.jpg Graphic file (type jpg)
- <use table1.jpg>
-Package pdftex.def Info: table1.jpg used on input line 570.
+[12] <list1.jpg, id=144, 466.74374pt x 410.2828pt>
+File: list1.jpg Graphic file (type jpg)
+ <use list1.jpg>
+Package pdftex.def Info: list1.jpg used on input line 570.
 (pdftex.def)             Requested size: 358.50317pt x 315.1487pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13] [14 <D:/ctex文件/毕业设计/table1.jpg>]
-<1.pdf, id=154, page=1, 553.06625pt x 749.80125pt>
+[13] [14 <D:/ctex文件/毕业设计/list1.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15]
+Underfull \hbox (badness 10000) in paragraph at lines 689--690
+
+ []
+
+<fig6.jpg, id=157, 325.96782pt x 351.56343pt>
+File: fig6.jpg Graphic file (type jpg)
+ <use fig6.jpg>
+Package pdftex.def Info: fig6.jpg used on input line 693.
+(pdftex.def)             Requested size: 256.07481pt x 276.2032pt.
+ [16 <D:/ctex文件/毕业设计/fig6.jpg>] <fig7.jpg, id=161, 339.51843pt x 27
+2.51813pt>
+File: fig7.jpg Graphic file (type jpg)
+
+<use fig7.jpg>
+Package pdftex.def Info: fig7.jpg used on input line 744.
+(pdftex.def)             Requested size: 256.07481pt x 205.54825pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[17] <table1.jpg, id=166, 339.51843pt x 221.32687pt>
+File: table1.jpg Graphic file (type jpg)
+ <use table1.jpg>
+Package pdftex.def Info: table1.jpg used on input line 757.
+(pdftex.def)             Requested size: 256.07481pt x 166.93695pt.
+ [18 <D:/ctex文件/毕业设计/fig7.jpg> <D:/ctex文件/毕业设计/table1.j
+pg>]
+<fig8.jpg, id=170, 346.29375pt x 265.74281pt>
+File: fig8.jpg Graphic file (type jpg)
+ <use fig8.jpg>
+Package pdftex.def Info: fig8.jpg used on input line 780.
+(pdftex.def)             Requested size: 256.07481pt x 196.51279pt.
+ [19 <D:/ctex文件/毕业设计/fig8.jpg>] <1.pdf, id=177, page=1, 553.06625pt
+ x 749.80125pt>
 File: 1.pdf Graphic file (type pdf)
- <use 1.pdf, page 1>
-Package pdftex.def Info: 1.pdf, page1 used on input line 602.
+
+<use 1.pdf, page 1>
+Package pdftex.def Info: 1.pdf, page1 used on input line 789.
 (pdftex.def)             Requested size: 553.0649pt x 749.79942pt.
 File: 1.pdf Graphic file (type pdf)
-
-<use 1.pdf, page 1>
-Package pdftex.def Info: 1.pdf, page1 used on input line 602.
+ <use 1.pdf, page 1>
+Package pdftex.def Info: 1.pdf, page1 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 810.13942pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 1>
-Package pdftex.def Info: 1.pdf, page1 used on input line 602.
-(pdftex.def)             Requested size: 597.57271pt x 810.13942pt.
-File: 1.pdf Graphic file (type pdf)
- <use 1.pdf, page 1>
-Package pdftex.def Info: 1.pdf, page1 used on input line 602.
+Package pdftex.def Info: 1.pdf, page1 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 810.13942pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 1>
-Package pdftex.def Info: 1.pdf, page1 used on input line 602.
+Package pdftex.def Info: 1.pdf, page1 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 810.13942pt.
- [15 <D:/ctex文件/毕业设计/1.pdf>]
-<1.pdf, id=185, page=2, 553.06625pt x 704.6325pt>
+File: 1.pdf Graphic file (type pdf)
+ <use 1.pdf, page 1>
+Package pdftex.def Info: 1.pdf, page1 used on input line 789.
+(pdftex.def)             Requested size: 597.57271pt x 810.13942pt.
+ [20 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=208, page=2, 553.06625pt x 
+704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 2>
-Package pdftex.def Info: 1.pdf, page2 used on input line 602.
+Package pdftex.def Info: 1.pdf, page2 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 2>
-Package pdftex.def Info: 1.pdf, page2 used on input line 602.
+Package pdftex.def Info: 1.pdf, page2 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 2>
-Package pdftex.def Info: 1.pdf, page2 used on input line 602.
+Package pdftex.def Info: 1.pdf, page2 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [16 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=204, page=3, 553.06625pt x 
+ [21 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=227, page=3, 553.06625pt x 
 704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 3>
-Package pdftex.def Info: 1.pdf, page3 used on input line 602.
+Package pdftex.def Info: 1.pdf, page3 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 3>
-Package pdftex.def Info: 1.pdf, page3 used on input line 602.
+Package pdftex.def Info: 1.pdf, page3 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 3>
-Package pdftex.def Info: 1.pdf, page3 used on input line 602.
+Package pdftex.def Info: 1.pdf, page3 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [17 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=209, page=4, 553.06625pt x 
+ [22 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=232, page=4, 553.06625pt x 
 704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 4>
-Package pdftex.def Info: 1.pdf, page4 used on input line 602.
+Package pdftex.def Info: 1.pdf, page4 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 4>
-Package pdftex.def Info: 1.pdf, page4 used on input line 602.
+Package pdftex.def Info: 1.pdf, page4 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 4>
-Package pdftex.def Info: 1.pdf, page4 used on input line 602.
+Package pdftex.def Info: 1.pdf, page4 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [18 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=214, page=5, 553.06625pt x 
+ [23 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=237, page=5, 553.06625pt x 
 704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 5>
-Package pdftex.def Info: 1.pdf, page5 used on input line 602.
+Package pdftex.def Info: 1.pdf, page5 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 5>
-Package pdftex.def Info: 1.pdf, page5 used on input line 602.
+Package pdftex.def Info: 1.pdf, page5 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 5>
-Package pdftex.def Info: 1.pdf, page5 used on input line 602.
+Package pdftex.def Info: 1.pdf, page5 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [19 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=219, page=6, 553.06625pt x 
+ [24 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=241, page=6, 553.06625pt x 
 704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 6>
-Package pdftex.def Info: 1.pdf, page6 used on input line 602.
+Package pdftex.def Info: 1.pdf, page6 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 6>
-Package pdftex.def Info: 1.pdf, page6 used on input line 602.
+Package pdftex.def Info: 1.pdf, page6 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 6>
-Package pdftex.def Info: 1.pdf, page6 used on input line 602.
+Package pdftex.def Info: 1.pdf, page6 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [20 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=226, page=7, 553.06625pt x 
+ [25 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=249, page=7, 553.06625pt x 
 704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 7>
-Package pdftex.def Info: 1.pdf, page7 used on input line 602.
+Package pdftex.def Info: 1.pdf, page7 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 7>
-Package pdftex.def Info: 1.pdf, page7 used on input line 602.
+Package pdftex.def Info: 1.pdf, page7 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 7>
-Package pdftex.def Info: 1.pdf, page7 used on input line 602.
+Package pdftex.def Info: 1.pdf, page7 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [21 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=230, page=8, 553.06625pt x 
+ [26 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=253, page=8, 553.06625pt x 
 704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 8>
-Package pdftex.def Info: 1.pdf, page8 used on input line 602.
+Package pdftex.def Info: 1.pdf, page8 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 8>
-Package pdftex.def Info: 1.pdf, page8 used on input line 602.
+Package pdftex.def Info: 1.pdf, page8 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 8>
-Package pdftex.def Info: 1.pdf, page8 used on input line 602.
+Package pdftex.def Info: 1.pdf, page8 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [22 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=237, page=9, 553.06625pt x 
+ [27 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=260, page=9, 553.06625pt x 
 704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 9>
-Package pdftex.def Info: 1.pdf, page9 used on input line 602.
+Package pdftex.def Info: 1.pdf, page9 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 9>
-Package pdftex.def Info: 1.pdf, page9 used on input line 602.
+Package pdftex.def Info: 1.pdf, page9 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 9>
-Package pdftex.def Info: 1.pdf, page9 used on input line 602.
+Package pdftex.def Info: 1.pdf, page9 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [23 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=241, page=10, 553.06625pt x
+ [28 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=264, page=10, 553.06625pt x
  704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 10>
-Package pdftex.def Info: 1.pdf, page10 used on input line 602.
+Package pdftex.def Info: 1.pdf, page10 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 10>
-Package pdftex.def Info: 1.pdf, page10 used on input line 602.
+Package pdftex.def Info: 1.pdf, page10 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 10>
-Package pdftex.def Info: 1.pdf, page10 used on input line 602.
+Package pdftex.def Info: 1.pdf, page10 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [24 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=246, page=11, 553.06625pt x
+ [29 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=269, page=11, 553.06625pt x
  704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 11>
-Package pdftex.def Info: 1.pdf, page11 used on input line 602.
+Package pdftex.def Info: 1.pdf, page11 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 11>
-Package pdftex.def Info: 1.pdf, page11 used on input line 602.
+Package pdftex.def Info: 1.pdf, page11 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 11>
-Package pdftex.def Info: 1.pdf, page11 used on input line 602.
+Package pdftex.def Info: 1.pdf, page11 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [25 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=252, page=12, 553.06625pt x
+ [30 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=274, page=12, 553.06625pt x
  704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 12>
-Package pdftex.def Info: 1.pdf, page12 used on input line 602.
+Package pdftex.def Info: 1.pdf, page12 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 12>
-Package pdftex.def Info: 1.pdf, page12 used on input line 602.
+Package pdftex.def Info: 1.pdf, page12 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 12>
-Package pdftex.def Info: 1.pdf, page12 used on input line 602.
+Package pdftex.def Info: 1.pdf, page12 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [26 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=257, page=13, 553.06625pt x
+ [31 <D:/ctex文件/毕业设计/1.pdf>] <1.pdf, id=280, page=13, 553.06625pt x
  704.6325pt>
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 13>
-Package pdftex.def Info: 1.pdf, page13 used on input line 602.
+Package pdftex.def Info: 1.pdf, page13 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
 
 <use 1.pdf, page 13>
-Package pdftex.def Info: 1.pdf, page13 used on input line 602.
+Package pdftex.def Info: 1.pdf, page13 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
 File: 1.pdf Graphic file (type pdf)
  <use 1.pdf, page 13>
-Package pdftex.def Info: 1.pdf, page13 used on input line 602.
+Package pdftex.def Info: 1.pdf, page13 used on input line 789.
 (pdftex.def)             Requested size: 597.57271pt x 761.33585pt.
- [27 <D:/ctex文件/毕业设计/1.pdf>] [28] (D:\ctex文件\毕业设计\gradu
+ [32 <D:/ctex文件/毕业设计/1.pdf>] [33] (D:\ctex文件\毕业设计\gradu
 ation.aux) ) 
 Here is how much of TeX's memory you used:
- 12781 strings out of 495354
- 203037 string characters out of 3183860
- 271113 words of memory out of 3000000
- 15624 multiletter control sequences out of 15000+200000
- 47790 words of font info for 164 fonts, out of 3000000 for 9000
+ 12927 strings out of 495354
+ 205586 string characters out of 3183860
+ 274113 words of memory out of 3000000
+ 15764 multiletter control sequences out of 15000+200000
+ 48689 words of font info for 167 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  40i,18n,44p,843b,757s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDO
+<C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDO
 WS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><
 C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simk
 ai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fo
@@ -1042,40 +1078,42 @@ imkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS
 /Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:
 /WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai
 .ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Font
-s/simkai.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WIND
-OWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc>
+s/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WINDOWS/Fonts/simkai.ttf><C:/WIND
+OWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf>
 <C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/sim
 sun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/F
-onts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/W
+onts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/W
 INDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.t
 tf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/
-simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOW
-S/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C
+simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOW
+S/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C
 :/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsu
 n.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fon
 ts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WIN
-DOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf
-><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/si
+DOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc
+><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/si
 mhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/
 Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/
-WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.
-ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts
+WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.
+ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts
 /simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDO
 WS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><
-D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/CTEX/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmbx12.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmbx7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><D:/C
-TEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/CTEX/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmmi10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmmi5.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/CTEX/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/CTEX/MiKTeX/fonts/type1/public
-/amsfonts/cm/cmr5.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><
-D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/CTEX/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmsy7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmti10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on graduation.pdf (28 pages, 1284995 bytes).
+C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><D:/CTEX/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmbx10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmbx12.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx7.pfb><D:/CTE
+X/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><D:/CTEX/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmex10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmmi10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/CTEX/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/CTEX/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb
+><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/CTEX/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmsy5.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/CTEX
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><D:/CTEX/MiKTeX/fonts/type1/p
+ublic/amsfonts/symbols/msbm10.pfb>
+Output written on graduation.pdf (33 pages, 1527421 bytes).
 PDF statistics:
- 563 PDF objects out of 1000 (max. 8388607)
+ 595 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 111 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 131 words of extra memory for PDF output out of 10000 (max. 10000000)
 
