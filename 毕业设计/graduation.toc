@@ -10,5 +10,7 @@
 \contentsline {subsection}{\numberline {3.2}物理与数学上的准备工作}{5}
 \contentsline {subsection}{\numberline {3.3}快速多极算法}{10}
 \contentsline {subsection}{\numberline {3.4}边界条件}{14}
-\contentsline {section}{\numberline {4}外文原文}{14}
-\contentsline {section}{参考文献}{28}
+\contentsline {subsection}{\numberline {3.5}数值实验结果}{17}
+\contentsline {subsection}{\numberline {3.6}总结}{19}
+\contentsline {section}{\numberline {4}外文原文}{19}
+\contentsline {section}{参考文献}{33}
