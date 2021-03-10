@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Ergul O, Gurel L. Efficient parallelization of the multilevel fast multipole algorithm for the solution of
 large-scale scattering problems[J]. IEEE Transactions on antennas and Propagation, 2008, 56(8):2335-2345.
 
@@ -25,4 +26,33 @@ Microwave and Optical Technology Letters, 1994, 7(10):466-470.
 Microwave and Wireless Components Letters, 2001, 11(7):311-312.
 
 
+=======
+Ergul O, Gurel L. Efficient parallelization of the multilevel fast multipole algorithm for the solution of
+large-scale scattering problems[J]. IEEE Transactions on antennas and Propagation, 2008, 56(8):2335-2345.
+
+[48] 弓晓东，胡俊，聂在平，等. 三维导体目标电磁散射的高阶多层快速多极子方法[J]. 电波科学学报，
+2004,19(5):557-580.
+
+[49] 胡俊，聂在平，王军，等. 三维电大目标散射求解的多层快速多极子方法[J]. 电波科学学报，
+2004,19(5):509-514.
+
+卢光辉，孙世新，聂在平等.并行处理技术在电大尺寸复杂目标电磁散射中的应用[J]. 电子学报,2003,31(6):882~885
+
+[50] Cui T J, Chew W C, Chen G, et al. Efficietn MLFMA, RPFMA, and FAFFA algorithms for EM scattering by
+very large structures[J]. IEEE Transactions on antennas and Propagation，2004,52(3):759-770.
+
+
+[41] Song J M, Chew W C. Multilevel fast-multipole algorithm for solving combined field integral equations of
+electromagnetic scattering[J]. Microwave and Optical Technology Letters, 1995, 10(1): 14-19.
+
+
+[42] Lu C C, Chew W C. A multilevel algorithm for solving a boundary integral equation of wave scattering[J].
+Microwave and Optical Technology Letters, 1994, 7(10):466-470.
+
+
+[43] Song J M, Chew W C. Error analysis for the truncation of multipole expansion of vector Green’s functions[J].
+Microwave and Wireless Components Letters, 2001, 11(7):311-312.
+
+
+>>>>>>> origin/main
 Velamparambil S , Chew W , Song J . 10 million unknowns: Is it that big?[J]. IEEE Antennas Propagat Mag, 2003, 45(2):43-58.

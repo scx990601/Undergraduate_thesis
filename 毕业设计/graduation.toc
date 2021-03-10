@@ -8,12 +8,12 @@
 \contentsline {subsection}{\numberline {1.2}研究进展}{5}
 \contentsline {subsection}{\numberline {1.3}内容梗概}{5}
 \contentsline {section}{\numberline {2}开题报告}{5}
-\contentsline {section}{\numberline {3}外文翻译}{6}
-\contentsline {subsection}{\numberline {3.1}简介}{6}
-\contentsline {subsection}{\numberline {3.2}物理与数学上的准备工作}{7}
-\contentsline {subsection}{\numberline {3.3}快速多极算法}{11}
-\contentsline {subsection}{\numberline {3.4}边界条件}{16}
-\contentsline {subsection}{\numberline {3.5}数值实验结果}{19}
-\contentsline {subsection}{\numberline {3.6}总结}{21}
-\contentsline {section}{\numberline {4}外文原文}{21}
-\contentsline {section}{参考文献}{35}
+\contentsline {section}{\numberline {3}外文翻译}{7}
+\contentsline {subsection}{\numberline {3.1}简介}{7}
+\contentsline {subsection}{\numberline {3.2}物理与数学上的准备工作}{8}
+\contentsline {subsection}{\numberline {3.3}快速多极算法}{12}
+\contentsline {subsection}{\numberline {3.4}边界条件}{17}
+\contentsline {subsection}{\numberline {3.5}数值实验结果}{20}
+\contentsline {subsection}{\numberline {3.6}总结}{22}
+\contentsline {section}{\numberline {4}外文原文}{22}
+\contentsline {section}{参考文献}{36}
